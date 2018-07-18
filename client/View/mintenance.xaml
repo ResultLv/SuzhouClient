@@ -1,0 +1,39 @@
+﻿<Window x:Class="client.View.mintenance"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:client.View"
+        xmlns:vm="clr-namespace:client.ViewModel"
+        mc:Ignorable="d"
+        Title="预防性维修" Height="180" Width="300"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="16"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="16"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <DockPanel Margin="0,10,0,5">
+                <TextBlock>首次维修点</TextBlock>
+                <TextBox x:Name="firstMaintenanceBox" Width="140" HorizontalAlignment="Right"></TextBox>
+            </DockPanel>
+            <DockPanel Margin="0,5,0,10">
+                <TextBlock>维修间隔</TextBlock>
+                <TextBox x:Name="intervalBox" Width="140" HorizontalAlignment="Right"></TextBox>
+            </DockPanel>
+            <DockPanel Margin="0,10,0,0">
+                <Button Width="70" Click="read">读取</Button>
+                <Button Width="70" HorizontalAlignment="Right" Click="set">设置</Button>
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</Window>

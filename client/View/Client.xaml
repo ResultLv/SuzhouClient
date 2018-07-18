@@ -1,0 +1,51 @@
+﻿<Window x:Name="load" x:Class="client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:client.ViewModel"
+        xmlns:local="clr-namespace:client"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="480" Width="720"
+        WindowStartupLocation="CenterScreen" Loaded="client_Loaded">
+    <Window.DataContext>
+        <vm:ClientViewModel></vm:ClientViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+
+    </Window.Resources>
+    <Grid x:Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Menu FontSize="16" >
+            <MenuItem Header="设备" Command="{Binding device}" CommandParameter="{Binding ElementName=mainFrame}" Height="40" Margin="10,0,10,0"/>
+            <MenuItem Header="数据上传" Command="{Binding upload}"  CommandParameter="{Binding ElementName=mainFrame}" Margin="10,0,10,0"/>
+            <MenuItem Header="生产状况" Command="{Binding display}" CommandParameter="{Binding ElementName=mainFrame}" Margin="10,0,10,0"/>
+            <MenuItem Header="设置" Margin="10,0,10,0">
+                <MenuItem Header="检查用户信息" Command="{Binding checkUserInfo}" CommandParameter="{Binding ElementName=grid}"></MenuItem>
+                <MenuItem Header="修改用户名和密码" Command="{Binding reviseUserInfo}"></MenuItem>
+                <MenuItem Header="设置预防性维护点" Command="{Binding setMaintenance}"></MenuItem>
+                <MenuItem Header="模具检修次数" Command="{Binding modiTimes}"></MenuItem>
+                <MenuItem Header="重置检修次数" Command="{Binding resetModiTimes}"></MenuItem>
+                <MenuItem Header="初始化系统数据" Command="{Binding initialSystemData}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="关于" Margin="10,0,10,0"/>
+        </Menu>
+        
+        <DockPanel x:Name="loginPanel" Grid.Column="2" Background="#F0F0F0" >
+            <Button DockPanel.Dock="Right" Margin="0,0,10,0" Width="60" Height="20" FontSize="14"  Command="{Binding signin}" CommandParameter="{Binding ElementName=grid}" >登录</Button>
+            <TextBlock  Margin="0,0,10,0" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center"> 未登录</TextBlock>
+        </DockPanel>
+
+        <!--页面切换-->
+        <Frame x:Name="mainFrame" Source="/View/device.xaml" Grid.Row="1" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden" />
+
+        <!--<TextBlock x:Name="status" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Status}" Background="#F0F0F0">状态栏</TextBlock>-->
+    </Grid>
+</Window>

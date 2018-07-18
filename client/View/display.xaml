@@ -1,0 +1,73 @@
+﻿<Page x:Class="client.View.display"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:client.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="720"
+      xmlns:vm="clr-namespace:client.ViewModel"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      Title="dsiplay">
+
+    <Page.DataContext>
+        <vm:DataViewModel></vm:DataViewModel>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="180"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="14"></Setter>
+        </Style>
+    </Page.Resources>
+
+    <!--绑定Page加载事件-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding PageLoaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="15"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="28">内存卡数据读取</TextBlock>
+        <DockPanel Grid.Row="1" Margin="0,5,0,0">
+            <DataGrid Grid.Row="1"  DockPanel.Dock="Top" Width="700" Height="280" AutoGenerateColumns="False" ItemsSource="{Binding datalist}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Fil}" Header="文件名"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding DtTm}" Header="日期时间"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Totl}" Header="成型总数"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding MdAv}" Header="成型平均时间"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding LstAv}" Header="上批次平均成型时间"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding MdEf}" Header="效率百分比"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding LstEf}" Header="上批次效率百分比"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding CurPer}" Header="当前周期数"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding MdTm}" Header="模具检修次数"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Dis}" Header="拆除状态"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Width="80" Height="24" DockPanel.Dock="Right" Margin="0,0,10,0" Command="{Binding readAll}">读取所有</Button>
+            <Button Width="100" Height="24" Margin="460,0,0,0" Command="{Binding read10}">读取近10条</Button>
+            
+        </DockPanel>
+
+        <GridSplitter HorizontalAlignment="Left" Height="5" Grid.Row="1" VerticalAlignment="Top" Width="710" Grid.ColumnSpan="2" Background="#E6E6E6"/>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Height="440" Grid.RowSpan="2" VerticalAlignment="Top" Width="5" Background="#E6E6E6"/>
+
+        <TextBlock x:Name="status" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Status}" Background="#F0F0F0"></TextBlock>
+    </Grid>
+</Page>

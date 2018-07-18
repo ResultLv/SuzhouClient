@@ -1,0 +1,104 @@
+﻿<Page x:Class="client.View.device"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:client.View"
+      xmlns:vm="clr-namespace:client.ViewModel"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="720"
+      Title="device">
+
+    <Page.DataContext>
+        <vm:DeviceViewModel></vm:DeviceViewModel>
+    </Page.DataContext>
+    
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="140"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <!--<Setter Property="Margin" Value="5"></Setter>-->
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"></Setter>
+            <!--<Setter Property="Margin" Value="5"></Setter>-->
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="14"></Setter>
+        </Style>
+    </Page.Resources>
+
+    <!--绑定Page加载事件-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding PageLoaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="15"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition Width="6*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18">设备信息</TextBlock>
+        <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18">设备状态</TextBlock>
+
+        <!--设备信息栏-->
+        <DockPanel Grid.Column="1" Margin="80,0,80,0">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
+                <TextBlock>序列号</TextBlock>
+                <TextBox IsReadOnly="True" Text="{Binding ID}"></TextBox>
+                <TextBlock Margin="0,10,0,0">软件版本号</TextBlock>
+                <TextBox IsReadOnly="True" Text="{Binding sRev}"></TextBox>
+            </StackPanel>
+            <StackPanel  Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock>硬件版本号</TextBlock>
+                <TextBox IsReadOnly="True" Text="{Binding hRev}"></TextBox>
+                <TextBlock Margin="0,10,0,0">发行日期</TextBlock>
+                <TextBox IsReadOnly="True" Text="{Binding cmp}"></TextBox>
+            </StackPanel>
+        </DockPanel>
+
+        <!--分割线-->
+        <!--<GridSplitter Grid.Row="1" Grid.ColumnSpan="2"></GridSplitter>
+        <Line Grid.ColumnSpan="2"></Line>-->
+
+        <!--设备状态栏-->
+        <DockPanel Grid.Row="1" Grid.Column="2" Margin="80,30,80,0">
+            <StackPanel VerticalAlignment="top" HorizontalAlignment="Center" Margin="0,0,0,0">
+                <TextBlock>WIFI连接状态</TextBlock>
+                <TextBox IsReadOnly="True" Text="{Binding AP}"></TextBox>
+                <TextBlock Margin="0,10,0,0">服务器连接状态</TextBlock>
+                <TextBox IsReadOnly="True" Text="{Binding Svr}"></TextBox>
+                <TextBlock Margin="0,10,0,0">设备时间</TextBlock>
+                <TextBox IsReadOnly="True" Text="{Binding DtTm}"></TextBox>
+                <TextBlock Margin="0,10,0,0">时间校正</TextBlock>
+                <TextBox Text="{Binding DtTm}"></TextBox>
+                <Button Command="{Binding timeCorrection}">确定</Button>
+            </StackPanel>
+            <StackPanel VerticalAlignment="top" HorizontalAlignment="Center" Margin="0,0,0,0">
+                <TextBlock>锂电池电压</TextBlock>
+                <TextBox IsReadOnly="True" Text="{Binding Batt}"></TextBox>
+                <TextBlock Margin="0,10,0,0">存储容量</TextBlock>
+                <TextBox IsReadOnly="True" Text="{Binding CardCap}"></TextBox>
+                <TextBlock Margin="0,10,0,0">拆卸状态</TextBlock>
+                <TextBox IsReadOnly="True" Text="{Binding Adh}"></TextBox>
+                <TextBlock Margin="0,10,0,0">当前拆卸次数</TextBlock>
+                <TextBox IsReadOnly="True" Text="{Binding Disarm}"></TextBox>
+            </StackPanel>
+        </DockPanel>
+
+        <!--<Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Margin="50,20,0,20" Width="460"/>-->
+        <!--<Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="234" Margin="50,20,0,20" Grid.Row="1" VerticalAlignment="Top" Width="460"/>-->
+        <GridSplitter HorizontalAlignment="Left" Height="5" Grid.Row="1" VerticalAlignment="Top" Width="710" Grid.ColumnSpan="2" Background="#E6E6E6"/>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Height="440" Grid.RowSpan="2" VerticalAlignment="Top" Width="5" Background="#E6E6E6"/>
+
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Status}" FontSize="12" Background="#F0F0F0"></TextBlock>
+    </Grid>
+</Page>
